@@ -8,22 +8,20 @@ function App() {
   const [to, setTo] = useState("inr");
   const [convertedAmount, setConvertedAmount] = useState(0);
   const [time, setTime] = useState(new Date());
-  const [rate,setRate]=useState(0);
+  const [rate, setRate] = useState(0);
   const currencyInfo = usecurrencyinfo(from);
   const option = Object.keys(currencyInfo);
-  
 
   const swap = () => {
     setFrom(to);
     setTo(from);
-    
   };
 
   const convert = () => {
     console.log("amount", amount);
     console.log("currency info ", currencyInfo);
     const result = amount * currencyInfo[to];
-    const r= 1*currencyInfo[to];
+    const r = 1 * currencyInfo[to];
     setRate(r);
     setConvertedAmount(Number(result.toFixed(2)));
     setTime(new Date());
@@ -31,14 +29,16 @@ function App() {
 
   return (
     <div
-      className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat"
+      className="w-full h-screen flex flex-col justify-center items-center bg-cover bg-no-repeat p-4"
       style={{
         backgroundImage: `url('${"https://images.unsplash.com/photo-1607728285423-a94d41a4d2f6?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}')`,
       }}
     >
-      <h1 className="text-center font-serif font-extrabold text-white text-4xl -mt-16 ">CURRENCY CONVERTER</h1>
-      <div className="w-full -mt-24">
-        <div className="w-full max-w-md mx-auto border border-gray-60 rounded-lg p-5 backdrop-blur-sm">
+      <h1 className="text-center font-serif font-extrabold text-white text-3xl md:text-5xl mb-8">
+        CURRENCY CONVERTER
+      </h1>
+      <div className="w-full">
+        <div className="w-full max-w-md mx-auto border border-gray-60 rounded-lg p-5 backdrop-blur-sm bg-white/30">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -84,20 +84,19 @@ function App() {
             </div>
             <button
               type="submit"
-              className="w-full bg-white text-blue-900 px-4 py-3  rounded-lg font-extrabold border-4 border-blue-900 transition duration-300 ease-in-out hover:text-blue-500 hover:border-blue-500"
+              className="w-full bg-white text-blue-900 px-4 py-3 rounded-lg font-extrabold border-4 border-blue-900 transition duration-300 ease-in-out hover:text-blue-500 hover:border-blue-500"
             >
               Convert {from.toUpperCase()} to {to.toUpperCase()}
             </button>
             <div className="w-full font-bold mt-3 text-white text-center text-2xl">
               <p>
-                {amount} {from.toUpperCase()} = {convertedAmount}{" "}
-                {to.toUpperCase()}
+                {amount} {from.toUpperCase()} = {convertedAmount} {to.toUpperCase()}
               </p>
               <p className="text-sm mt-2 font-semibold">
                 Rate - {rate.toFixed(2)} {to.toUpperCase()}
               </p>
             </div>
-            <div className="w-full mt-4 text-gray-300 text-sm text-center">
+            <div className="w-full mt-4 text-gray-200 text-sm text-center font-semibold">
               <p>
                 Last Update -{" "}
                 {time.toLocaleTimeString(navigator.language, {
